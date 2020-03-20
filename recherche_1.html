@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="{{ url_for('static', filename='css/style.css')}}" rel="stylesheet" type="text/css" />
+  <title> Comment va votre Hotel?? </title>
+</head>
+
+<body>
+  <div id="nn">
+    <h2> veuillez saisir un commentaire sur l'hotel ici </h2>
+    <form action="{{ url_for('recherche') }}" method="POST">
+      Votre avis : <input type="input" id="critere" name="critere" size="80px" />
+      <input type="submit" value="Go">
+  </div>
+  <!-- <button onclick="recherche()"> Va chercher </button> -->
+
+  </form>
+
+  <body>
+    {{tagList}}
+
+    {% block i %}
+    {% if i is defined and not none %}
+    <p> <b>hotel : </b> {{i}} point(s)</p>
+    {% endif %}
+    {% endblock %}
+    {% block sorties %}
+    {% if listenoms is defined and not none %}
+    {% for key, value in listenoms.items() %}
+    <p> le nom est : <a style="color:red" ;> <b> {{key}} </a> , </b> le score est: <b>{{value}} </b>
+    </p>
+    {% endfor %}
+    {% endif %}
+    {% if dicADJ is defined and not none %}
+    {% for key, value in dicADJ.items() %}
+    {% for cle, valeur in value.items() %}
+    <p> l'adjectif est : <b> {{cle}} </b> et sa valeur est: <b>{{valeur}} </b> </p>
+    {% endfor %}
+    {% endfor %}
+    {% endif %}
+
+    {% if dicADV is defined and not none %}
+    {% for keys, values in dicADV.items() %}
+    {% for clef, valeurr in values.items() %}
+    <p> l'adverbe est : <b> {{clef}} </b> et sa valeur est: <b>{{valeurr}} </b> </p>
+    {% endfor %}
+    {% endfor %}
+    {% endif %}
+
+
+
+
+
+
+
+
+    {% endblock %}
+
+
+    {% block result %}
+    <table>
+      <tr>
+        <td>
+          <p style="color:blue" ; /> Adjectif
+        </td>
+        <td>
+          <p style="color:red" ; /> Adverbe </p>
+          </p>
+        </td>
+        <td>
+          <p style="color:green" ; /> Nom </p>
+        </td>
+      </tr>
+    </table>
+    <div id='main'>
+      <table>
+        <tr>
+          {% for variable in crt %}
+          {% if variable in listeadjectifs %}
+
+          <p>
+            <td>
+              <p style="color:blue" ;> {{ variable}}
+            </td>
+          </p>
+          </p>
+          {% elif variable in listeadverbs %}
+          <p>
+            <td>
+              <p style="color:red" ;> {{ variable}}
+            </td>
+          </p>
+          </p>
+          {%  elif variable in noms %}
+          <p>
+            <td>
+              <p style="color:green" ;> {{ variable}}
+            </td>
+          </p>
+          </p>
+          {% else %}
+          <p>
+            <td>
+              <p style="color:black" ;> {{ variable}}
+            </td>
+          </p>
+          </p>
+          {% endif %}
+          {% endfor %}
+        </tr>
+      </table>
+    </div>
+
+
+
+    <hr />
+    {%   block res %}
+    <div id="mainn">
+      <ul>
+        {% if mm is defined and mm is not none %}
+        {% for s,b in mm.items() %}
+        {% for x in b %}
+
+
+
+
+        <li>
+          <p style="color:black" ;> </p> {{x}}
+        </li>
+
+
+
+        {% endfor %}
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+
+
+    {% endblock %}
+    {% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </body>
+
+
+</html>
